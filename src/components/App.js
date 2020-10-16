@@ -9,7 +9,8 @@ import NavBar from './views/NavBar/NavBar'
 import HomePage from './HomePage'
 import LoginPage from './Login'
 import RegisterPage from './Register'
-
+import User from './User'
+import Auth from '../hoc/auth'
 function App() {
   return (
     <Router>
@@ -17,11 +18,10 @@ function App() {
         <NavBar />
         <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
           <Switch>
-
-            <Route path="/home" component = {HomePage} />
-            <Route path="/register" component = { RegisterPage } />
-            <Route path="/login" component = { LoginPage } />
-              
+            <Route exact path="/" component = {Auth(HomePage, null)} />
+            <Route exact path="/register" component = {Auth(RegisterPage, false)} />
+            <Route exact path="/login" component = {Auth(LoginPage , false)} />
+            <Route exact path="/user/resource"  component = {Auth(User, true) } />
           </Switch>
         </div>
         <Footer />

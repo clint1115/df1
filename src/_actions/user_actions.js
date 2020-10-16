@@ -7,6 +7,8 @@ import {
 } from './types';
 import { USER_SERVER } from '../components/Config.js';
 
+
+
 export function registerUser(dataToSubmit){
     const request = axios.post(`${USER_SERVER}/register`, dataToSubmit)
         .then(response => response.data);
@@ -17,6 +19,7 @@ export function registerUser(dataToSubmit){
 }
 
 export function loginUser(dataToSubmit){
+    
     const request = axios.post(`${USER_SERVER}/login`,dataToSubmit)
                 .then(response => response.data);
 
@@ -27,8 +30,16 @@ export function loginUser(dataToSubmit){
 }
 
 export function auth(){
-    const request = axios.get(`${USER_SERVER}/auth`)
-    .then(response => response.data);
+
+    const token = sessionStorage.getItem("X-AUTH-TOKEN")
+
+    const request = axios({
+        method: 'post', 
+        url: `${USER_SERVER}/auth`,
+        headers: {
+          "X-AUTH-TOKEN" : token
+        }
+      }).then(response => response.data);
 
     return {
         type: AUTH_USER,

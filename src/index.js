@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css'
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import App from './components/App';
@@ -7,7 +8,7 @@ import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import Reducer from './_reducers';
-
+import { BrowserRouter } from "react-router-dom";
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
 ReactDOM.render(
@@ -17,8 +18,9 @@ ReactDOM.render(
       window.__REDUX_DEVTOOLS_EXTENSION__ &&
       window.__REDUX_DEVTOOLS_EXTENSION__()
   )}
->
-    <App />
+><BrowserRouter>
+  <App />
+    </BrowserRouter>
     </Provider>
   ,document.getElementById('root')
 );

@@ -1,6 +1,4 @@
 import React from 'react'
-import moment from "moment";
-import Axios from 'axios'
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { registerUser } from '../_actions/user_actions'
@@ -66,16 +64,15 @@ return(
             email: values.email,
             password: values.password,
             name: values.name      
-          };
+          };  
 
           dispatch(registerUser(dataToSubmit)).then(response => {
-            if (response.payload.enabled) {
+            if (response.payload === 'success') {
               props.history.push("/login");
             } else {
               alert('가입 실패')
             }
           })
-      
               setSubmitting(false);
              }, 500);
 }}

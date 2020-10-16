@@ -46,21 +46,21 @@ function Login(props) {
   
             dispatch(loginUser(dataToSubmit))
               .then(response => {
-                if (response.payload.loginSuccess) {
-                  window.localStorage.setItem('userId', response.payload.userId);
+                if (response.payload.success) {
+                  window.localStorage.setItem('userId', response.payload.id);
                   if (rememberMe === true) {
-                    window.localStorage.setItem('rememberMe', values.id);
+                    window.localStorage.setItem('rememberMe', values.email);
                   } else {
                     localStorage.removeItem('rememberMe');
                   }
-                  sessionStorage.setItem("X-AUTH-TOKEN",response.payload.token)
+                  sessionStorage.setItem("X-AUTH-TOKEN", response.payload.token)
                   props.history.push("/");
-                } else {
-                  setFormErrorMessage('Check out your Account or Password again')
+                } else {  
+                  setFormErrorMessage('Check out your Account or Password again1')
                 }
               })
               .catch(err => {
-                setFormErrorMessage('Check out your Account or Password again')
+                setFormErrorMessage('Check out your Account or Password again2')
                 setTimeout(() => {
                   setFormErrorMessage("")
                 }, 3000);

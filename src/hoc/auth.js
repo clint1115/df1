@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import { auth } from '../_actions/user_actions';
 import { useSelector, useDispatch } from "react-redux";
 
-export default function (SpecificComponent, option, adminRoute = null) {
+export default function (SpecificComponent, option) {
     function AuthenticationCheck(props) {
-
+       
         let user = useSelector(state => state.user);
         const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
                     //Loggined in Status 
                 } else {
                     //supposed to be Admin page, but not admin person wants to go inside
-                    if (adminRoute && !response.payload.isAdmin) {
+                    if (!(response.payload.isAdmin) ) {
                         props.history.push('/')
                     }
                     //Logged in Status, but Try to go into log in page 
